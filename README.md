@@ -15,7 +15,8 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-Run the script with:
+1. Set the "book_title" variable to the title of your book and place your text book in the "books" folder. If preferred, uncomment the PDF reader section for a PDF book instead of a text book. <br>
+2. Run the script with:
 
 ```bash
 python zipf_analysis.py
