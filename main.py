@@ -2,9 +2,14 @@ import PyPDF2  # pip install PyPDF2
 import nltk  # pip install nltk   ....   for more infor check https://www.nltk.org/
 from collections import Counter
 import matplotlib.pyplot as plt  # pip install matplot
+import os
 
 
 book_path ='book1.txt'
+plot_folder = 'zipf_plots'
+
+if not os.path.exists(plot_folder):
+    os.makedirs(plot_folder)
 
 def get_custom_rank():
     return (list(range(1,10, 1)) + list(range(10,100, 10)) + list(range(100, 1000, 100)) + list(range(1000, 10000, 1000)) + list(range(10000, 100000, 1000)) )
@@ -77,7 +82,10 @@ plt.xlabel('rank')
 plt.ylabel('frequency')
 plt.title("Zipf's Law: Freq. v.s. Rank")
 plt.grid(True)
+plt.savefig(os.path.join(plot_folder, "zipfs_law_frequency_rank.png"))
 plt.show()
+print(f"zipfs_law_frequency_rank plot saved in {plot_folder} folder")
+plt.close()
 
 plt.figure(figsize=(10, 8))
 plt.loglog(ranks, frequencies, marker='o', linestyle='-', color='b')
@@ -85,4 +93,7 @@ plt.xlabel('log(rank)')
 plt.ylabel('log(frequency)')
 plt.title("Zipf's Law: Log(Freq.) v.s. Log(Rank)")
 plt.grid(True)
+plt.savefig(os.path.join(plot_folder, "zipfs_law_log_frequency_rank.png"))
 plt.show()
+print(f"zipfs_law_log_frequency_rank plot saved in {plot_folder} folder")
+plt.close()
