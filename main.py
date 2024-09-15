@@ -4,9 +4,12 @@ from collections import Counter
 import matplotlib.pyplot as plt  # pip install matplot
 import os
 
-
-book_path ='book1.txt'
+books_folder = 'books'
+book_title = 'book1.txt'
 plot_folder = 'zipf_plots'
+book_path = os.path.join(books_folder, book_title)
+
+
 
 if not os.path.exists(plot_folder):
     os.makedirs(plot_folder)
@@ -80,7 +83,7 @@ plt.figure(figsize=(10, 8))
 plt.plot(ranks, frequencies, marker='o', linestyle='-', color='b')
 plt.xlabel('rank')
 plt.ylabel('frequency')
-plt.title("Zipf's Law: Freq. v.s. Rank")
+plt.title(f"Zipf's Law: Freq. v.s. Rank for {book_title}")
 plt.grid(True)
 plt.savefig(os.path.join(plot_folder, "zipfs_law_frequency_rank.png"))
 plt.show()
@@ -91,7 +94,7 @@ plt.figure(figsize=(10, 8))
 plt.loglog(ranks, frequencies, marker='o', linestyle='-', color='b')
 plt.xlabel('log(rank)')
 plt.ylabel('log(frequency)')
-plt.title("Zipf's Law: Log(Freq.) v.s. Log(Rank)")
+plt.title(f"Zipf's Law: Log(Freq.) v.s. Log(Rank) for {book_title}")
 plt.grid(True)
 plt.savefig(os.path.join(plot_folder, "zipfs_law_log_frequency_rank.png"))
 plt.show()
