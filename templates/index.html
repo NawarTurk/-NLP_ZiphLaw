@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ziph Law</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Upload a Text File for Zipf's Law Analysis</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {{ form.file.label }} 
+        {{ form.file }} <br>
+        {{ form.submit }} <br>
+    </form>
+    {% if freq_img_data and log_img_data %}
+        <h2>Frequency vs Rank</h2>
+        <img src="data:image/png;base64,{{ freq_img_data }}" alt="Frequency vs Rank Plot">
+        <h2>Log(Freq.) vs Log(Rank)</h2>
+        <img src="data:image/png;base64,{{ log_img_data }}" alt="Log(Frequency) vs Log(Rank) Plot">
+    {% endif %}
+
+    {% if table_data %}
+        <h2>Word Frequency Table</h2>
+        <table border="1">
+            <tr>
+                <th>Word</th>
+                <th>Frequency</th>
+                <th>Cumulative Frequency</th>
+                <th>Rank</th>
+                <th>k = f * r</th>
+            </tr>
+            {% for row in table_data %}
+            <tr>
+                <td>{{ row.word }}</td>
+                <td>{{ row.frequency }}</td>
+                <td>{{ row.cumulative_frequency }}</td>
+                <td>{{ row.rank }}</td>
+                <td>{{ row.k }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+</body>
+</html>
